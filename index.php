@@ -1,3 +1,6 @@
+<?php
+  require_once('includes/selector.inc');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -117,21 +120,52 @@
       </div>
     </div>
     
-    <div class="site-blocks-cover overlay" style="background-image: url(images/hero_bg_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5"id="home-section">
+   <div class="site-blocks-cover overlay" style="background-image: url(images/hero_bg_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5"id="home-section">
       <div class="container">
         <div class="row align-items-center text-center justify-content-center">
           <div class="col-md-8">
-            <a data-fancybox data-ratio="2" href="https://vimeo.com/317571768" class="play-button d-block">
-              <span class="icon-play"></span>
-            </a>
-            <h1 class="text-uppercase">Interior Design</h1>
-            <span class="sub-text mb-3 d-block"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam molestiae ipsam, atque.</em></span>
+            <form action="index.php" method="post" class="form-subscribe">
+                <div class="form-group">
+                  <label for="categoryUrl" class="categoryUrl">Category</label>
+                  <div class="input-group mb-3">
+                    <input type="text" name="advertise" class="form-control" value="https://www.mudah.my/malaysia/Mobile-Phones-and-Gadgets-3020/iphone-for-sale?lst=0&fs=1&w=3&cg=3020&q=iphone&st=s&ps=1" id='categoryUrl' placeholder="put the category URL" aria-describedby="categoryUrl">
+                    <div class="input-group-append">
+                      <input class="btn btn-primary" type="submit" id="button-addon2">
+                    </div>
+                  </div>
+                </div>
+            </form>
+           
+            <!-- <a data-fancybox data-ratio="2" href="https://vimeo.com/317571768" class="play-button d-block"> -->
+              <!-- <span class="icon-play"></span> -->
+            <!-- </a> -->
+            <!-- <h1 class="text-uppercase">Interior Design</h1> -->
+            <!-- <span class="sub-text mb-3 d-block"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam molestiae ipsam, atque.</em></span> -->
           </div>
         </div>
+        <table>
+          <thead>
+                <th>
+                  <td>No</td>
+                </th>
+                <th>
+                  <td>Name</td>
+                </th>
+                <th>
+                  <td>Phone Number</td>
+                </th>
+          </thead>
+        <?php
+          if($_POST['advertise']){
+              $adsData=file_get_contenst('$_POST[advertise]');
+              echo $_POST['advertise'];
+            }
+        ?>    
+        </table>
       </div>
     </div>  
 
-    
+     <!-- 
     <div class="site-section  border-bottom">
       <div class="container">
         <div class="row">
@@ -697,8 +731,8 @@
 
         </div>
       </div>
-    </div>
-
+    </div> -->
+<!-- 
     <div class="site-section bg-light" id="contact-section">
       <div class="container">
         <div class="row justify-content-center">
@@ -747,7 +781,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <footer class="site-footer border-top">
       <div class="container">
