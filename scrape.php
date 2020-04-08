@@ -23,7 +23,7 @@
     </style>
   </head>
   <body>
-  <h1 class="title">malaysia Phone Product</h1>
+  <h1 class="title">Malaysia Phone Product</h1>
       <div class="container">
     <table class="table table-striped table-responsive-md table-hover">
       <thead>
@@ -45,15 +45,13 @@
           $allPhoneData="";
           $k=1;
           $adsDataPhone=explode("?", $_POST['advertise']);
-          for($i=1;$i<3;$i++)
+          for($i=0;$i<1;$i++)
           {
-            // echo "<a href='".$adsDataPhone[0]."?o=".$i."&q=&so=1&th=1'>kgs</a><br>";
             $adsData=file_get_contents($adsDataPhone[0]."?o=".$i."&q=&so=1&th=1");
             $selectPhoneUrl=select_elements('.thumbnail_images', $adsData);
-            for($j=0;40;$j++){
+            for($j=0;$j<40;$j++){
               if(isset($selectPhoneUrl[$j]['children'][2]['attributes']['href']))
               {
-                if(isset($selectPhoneUrl[$j]['children'][2]['attributes']['href'])){
                   $phoneInfo=file_get_contents($selectPhoneUrl[$j]['children'][2]['attributes']['href']);
                   $selectPhoneName=select_elements('.complex_header', $phoneInfo);
                   $selectPhoneNumber=select_elements('#number-space', $phoneInfo);
@@ -63,11 +61,9 @@
                     $phoneNumber=$selectPhoneNumber[0]['children'][1]['children'][1]['children'][0]['attributes']['src'];
                     $allPhoneData.="<tr><td>".$k++."</td><td>".$phoneName."</td><td><img src='".$prefixNumber."'><img src='".$phoneNumber."'></td></tr>";
                   }
-                }
               }
               else if(!isset($selectPhoneUrl[$j]['children'][2]['attributes']['href']))
               {
-                if(isset($selectPhoneUrl[$j]['children'][1]['attributes']['href'])){
                   $phoneInfo=file_get_contents($selectPhoneUrl[$j]['children'][1]['attributes']['href']);
                   $selectPhoneName=select_elements('.complex_header', $phoneInfo);
                   $selectPhoneNumber=select_elements('#number-space', $phoneInfo);
@@ -77,7 +73,6 @@
                     $phoneNumber=$selectPhoneNumber[0]['children'][1]['children'][1]['children'][0]['attributes']['src'];
                     $allPhoneData.="<tr><td>".$k++."</td><td>".$phoneName."</td><td><img src='".$prefixNumber."'><img src='".$phoneNumber."'></td></tr>";
                   }
-                }
               }
             }
           }
