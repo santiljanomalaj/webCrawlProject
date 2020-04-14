@@ -41,11 +41,19 @@
     </thead>
     <tbody>
     <?php
+      set_time_limit(0);
       if(isset($_POST['advertise'])){
           $allPhoneData="";
           $k=1;
-          $adsDataPhone=explode("?", $_POST['advertise']);
-          for($i=0;$i<1;$i++)
+          $adsDataPhone=explode("=", $_POST['advertise']);
+          if(!$adsDataPhone[1]){
+            $realPhoneData=explode("&", $adsDataPhone[1]);
+          }
+          else {
+            $realPhoneData[0]=1;
+          }
+          $adsDataPhone=explode("?",$adsDataPhone[0]);
+          for($i=$realPhoneData[0];$i<$realPhoneData[0]+1;$i++)
           {
             $adsData=file_get_contents($adsDataPhone[0]."?o=".$i."&q=&so=1&th=1");
             $selectPhoneUrl=select_elements('.thumbnail_images', $adsData);
@@ -54,30 +62,32 @@
               {
                   $phoneInfo=file_get_contents($selectPhoneUrl[$j]['children'][2]['attributes']['href']);
                   $selectPhoneName=select_elements('.complex_header', $phoneInfo);
-                  $selectPhoneNumber=select_elements('#number-space', $phoneInfo);
+                  $selectContactNumber=select_elements('.moreless', $phoneInfo);
+                  $selectNumber = explode('01',$selectContactNumber[0]['text']);
                   $phoneName=$selectPhoneName[0]['children'][0]['text'];
-                  if(isset($selectPhoneNumber[0]['children'][0]['children'][1]['children'][0]['attributes']['src']) && isset($selectPhoneNumber[0]['children'][1]['children'][1]['children'][0]['attributes']['src'])){
-                    $prefixNumber=$selectPhoneNumber[0]['children'][0]['children'][1]['children'][0]['attributes']['src'];
-                    $phoneNumber=$selectPhoneNumber[0]['children'][1]['children'][1]['children'][0]['attributes']['src'];
-                    $allPhoneData.="<tr><td>".$k++."</td><td>".$phoneName."</td><td><img src='".$prefixNumber."'><img src='".$phoneNumber."'></td></tr>";
+                  if(isset($selectNumber[1])){
+                    // $prefixNumber = explode('.', $selectNumber[1]);
+                    // $exactPrefix = preg_split('/(?<=[0-9])(?=[a-z]+)/i',$prefixNumber[0]);
+                    $allPhoneData.="<tr><td>".$k++."</td><td>".$phoneName."</td><td><b>01".$selectNumber[1]."</b></td></tr>";
                   }
               }
               else if(!isset($selectPhoneUrl[$j]['children'][2]['attributes']['href']))
               {
                   $phoneInfo=file_get_contents($selectPhoneUrl[$j]['children'][1]['attributes']['href']);
                   $selectPhoneName=select_elements('.complex_header', $phoneInfo);
-                  $selectPhoneNumber=select_elements('#number-space', $phoneInfo);
+                  $selectContactNumber=select_elements('.moreless', $phoneInfo);
+                  $selectNumber = explode('01',$selectContactNumber[0]['text']);
                   $phoneName=$selectPhoneName[0]['children'][0]['text'];
-                  if(isset($selectPhoneNumber[0]['children'][0]['children'][1]['children'][0]['attributes']['src']) && isset($selectPhoneNumber[0]['children'][1]['children'][1]['children'][0]['attributes']['src'])){
-                    $prefixNumber=$selectPhoneNumber[0]['children'][0]['children'][1]['children'][0]['attributes']['src'];
-                    $phoneNumber=$selectPhoneNumber[0]['children'][1]['children'][1]['children'][0]['attributes']['src'];
-                    $allPhoneData.="<tr><td>".$k++."</td><td>".$phoneName."</td><td><img src='".$prefixNumber."'><img src='".$phoneNumber."'></td></tr>";
+                  if(isset($selectNumber[1])){
+                    // $prefixNumber = explode('.', $selectNumber[1]);
+                    // $exactPrefix = preg_split('/(?<=[0-9])(?=[a-z]+)/i',$prefixNumber[0]);
+                    $allPhoneData.="<tr><td>".$k++."</td><td>".$phoneName."</td><td><b>01".$selectNumber[1]."</b></td></tr>";
                   }
               }
-            }
           }
-          echo $allPhoneData;
         }
+        echo $allPhoneData;
+      }
     ?>    
     </tbody>
     </table>
