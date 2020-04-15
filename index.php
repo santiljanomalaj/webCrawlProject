@@ -125,7 +125,28 @@
                 <div class="form-group">
                   <label for="categoryUrl" class="categoryUrl">Category</label>
                   <div class="input-group mb-3">
-                    <input type="text" name="advertise" class="form-control" value="https://www.mudah.my/malaysia/Mobile-Phones-and-Gadgets-all-3020?so=1" id='categoryUrl' placeholder="put the category URL" aria-describedby="categoryUrl">
+                    <select class="form-control" name="location" id="exampleFormControlSelect1">
+                      <option value="Kuala-Lumpur">Kuala Lumpur</option>
+                      <option value="Neighbouring-9">Neighbouring regions</option>
+                      <option value="Malaysia">Entire Malaysia</option>
+                      <option value="Johor">Johor</option>
+                      <option value="Kedah">Kedah</option>
+                      <option value="Kelantan">Kelantan</option>
+                      <option value="Labuan">Labuan</option>
+                      <option value="Melaka">Melaka</option>
+                      <option value="Negeri-Sembilan">Negeri Sembilan</option>
+                      <option value="Pahang">Pahang</option>
+                      <option value="Penang">Penang</option>
+                      <option value="Perak">Perak</option>
+                      <option value="Perlis">Perlis</option>
+                      <option value="Putrajaya">Putrajaya</option>
+                      <option value="Selangor">Selangor</option>
+                      <option value="Sabah">Sabah</option>
+                      <option value="Sarawak">Sarawak</option>
+                      <option value="Terengganu">Terengganu</option>
+                    </select>
+                    <!-- <input type="text" name="advertise" class="form-control" value="https://www.mudah.my/malaysia/Mobile-Phones-and-Gadgets-all-3020?so=1" id='categoryUrl' placeholder="put the category URL" aria-describedby="categoryUrl"> -->
+                    <input type="number" name="pageNumber" class="form-control" value="1" id='Number' placeholder="put the page number" aria-describedby="categoryUrl">
                     <div class="input-group-append">
                       <input class="btn btn-primary" type="submit" id="button-addon2">
                     </div>
